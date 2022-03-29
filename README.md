@@ -1,5 +1,5 @@
 # This codebase contains the files which create 2 redpanda topics and push data to them in a json format
-# The schema for the topics are
+### The schema for the topics are
 
 ![Screenshot 2022-03-29 213712](https://user-images.githubusercontent.com/102608342/160656364-0be1c2a6-79af-43a0-8093-64d5f4a0c240.png)
 
