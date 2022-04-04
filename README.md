@@ -12,6 +12,14 @@
 6) ```source myprojectenv/bin/activate```
 7) ```pip3 install -r requirements.txt```
 
+### Update broker values
+By default the code assumes that you have setup redpanda in your localhost. Incase you are setting up
+redpanda in a docker/mac environment you will need to update the ```admin``` and ```producer``` values
+in the code to match the broker values (choose any single one) on your environment. The following are the
+locations where the values would need to be updated.
+
+![image](https://user-images.githubusercontent.com/102608342/161502626-fc464ca1-5ea6-44ac-8fa1-748adebfc467.png)
+
 ### Running the code
 ```python redpanda_producer.py```
 
