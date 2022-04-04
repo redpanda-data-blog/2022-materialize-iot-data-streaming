@@ -1,4 +1,3 @@
-# DB MODEL HAS Date, step_count, mode_of_exercise, calories_burnt, Very Active minutes, Sedantary minutes
 from kafka import KafkaProducer, KafkaAdminClient
 from kafka.admin import NewTopic
 from time import sleep
