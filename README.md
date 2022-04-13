@@ -1,7 +1,7 @@
-# This codebase contains the files which create 2 redpanda topics and push data to them in a json format
+# FITBIT data generation
 ### The schema for the topics are
 
-![Screenshot 2022-03-29 213712](https://user-images.githubusercontent.com/102608342/160656364-0be1c2a6-79af-43a0-8093-64d5f4a0c240.png)
+![image](https://user-images.githubusercontent.com/102608342/163138012-be11ad54-fb00-4c79-b225-ee594d3dfe6c.png)
 
 ### Steps to configure the code and get it working
 1) Clone the workspace
@@ -14,13 +14,10 @@
 
 ### Update broker values
 By default the code assumes that you have setup redpanda in your localhost. Incase you are setting up
-redpanda in a docker/mac environment you will need to update the ```admin``` and ```producer``` values
-in the code to match the broker values (choose any single one) on your environment. The following are the
-locations where the values would need to be updated.
+redpanda in a docker/mac environment. You will need to update the parameter ```REDPANDA_BROKER_IP``` in the ```.env``` file
 
-![image](https://user-images.githubusercontent.com/102608342/161502626-fc464ca1-5ea6-44ac-8fa1-748adebfc467.png)
+![image](https://user-images.githubusercontent.com/102608342/163139789-198faadf-6e65-4bdc-9c1a-10fc11a57d75.png)
 
 ### Running the code
 ```python redpanda_producer.py```
 
-The code creates 100000 records with 1 record every 0.5 seconds. You can stop the execution anytime by hitting ```ctrl + c```
