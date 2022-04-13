@@ -11,6 +11,8 @@ def main():
     modes_of_excercise = ['cycling', 'skiing', 'walking', 'jogging', 'running', 'swimming', 'climbing',
                           'football', 'basketball', 'tennis', 'badminton', 'volleyball', 'rugby', 'cricket', 'baseball']
     fake = Faker()
+    owner_id = 0
+    activity_id = 0
 
     try:
         # Create Kafka topic
@@ -25,19 +27,26 @@ def main():
                              value_serializer=lambda m: json.dumps(m).encode('ascii'))
     for i in range(100000):
         fake_date = fake.date_this_year(True, True)
-        total_steps = fake.pyint(1500, 10000)
-        exercise = fake.word(ext_word_list=modes_of_excercise)
-        calories = fake.pyint(200, 875)
-        active_minutes = fake.pyint(35, 100)
-        sedantary_minutes = fake.pyint(5, 20)
         name = fake.name()
+        owner_id += 1
         str_date = str(fake_date)
-        producer.send(topic_name1, {'date': str_date, 'total_steps': total_steps, 'exercise': exercise,
-                                   'calories_burnt': calories, 'active_mins': active_minutes,
-                                   'sedantary_mins': sedantary_minutes})
-        producer.send(topic_name2, {'calories': calories, 'owner': name})
-        print("Inserted entry ", i, " to both topics")
-        sleep(0.5)
+        producer.send(topic_name2, {'fitbit_owner': name, 'owner_id': owner_id, 'date': str_date})
+        num_activities = fake.pyint(1,5)
+        single_activity = 1
+        while single_activity <= num_activities:
+            activity_id += 1
+            total_steps = fake.pyint(1500, 10000)
+            exercise = fake.word(ext_word_list=modes_of_excercise)
+            calories = fake.pyint(200, 875)
+            active_minutes = fake.pyint(35, 100)
+            sedentary_minutes = fake.pyint(5, 20)
+            producer.send(topic_name1, {'date': str_date, 'total_steps': total_steps, 'exercise': exercise,
+                                       'calories_burnt': calories, 'active_mins': active_minutes,
+                                       'sedentary_mins': sedentary_minutes, 'owner_id': owner_id, 'activity_id': activity_id})
+            single_activity += 1
+        print(f"Inserted entry '{name}' to '{topic_name2}'")
+        print(f"Inserted {num_activities} activities against '{name}' in '{topic_name1}'")
+        sleep(10)
 
 
 main()
